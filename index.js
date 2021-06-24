@@ -8,7 +8,9 @@ const http = require('http');
 const server = http.Server(app);
 // 
 
-// creates the websocket
+// creates the websocket namespace
+// thnk of it as a cluster of sockets
+// each user gets a socket from the io server
 const { Server } = require('socket.io');
 const io = new Server(server, {
     // defines the cors policy
@@ -33,15 +35,20 @@ server.listen(port, () => {
 // triggers when a user connects to the socket
 io.on('connection', (socket) => {
     // sets an event listener for the "new-message" event
-    console.log(socket.id)
+    
     socket.on('new-message', (message, id) => {
         console.log("new message recived: "+message)
         // sends back an event of "new-message" 
-        io.emit("new-message",message);
+        io.to(id).emit("new-message",message);
     });
 
 
-    socket.on('comp-key', (letter, id, playerNum) =>{
+    socket.on('comp-key', (letter, id, playerNum) => {
         io.to(id).emit('comp-key', letter, playerNum)
+    })
+
+    // need the room id from the front end
+    socket.on('join-comp-room', (id) => {
+        socket.join(id)
     })
 });
