@@ -19,15 +19,6 @@ const io = new Server(server, {
 });
 // 
 
-// triggers when a user connects to the socket
-io.on('connection', (socket) => {
-    // sets an event listener for the "new-message" event
-    socket.on('new-message', (message) => {
-        // sends back an event of "new-message" 
-        io.emit("new-message",message);
-    });
-});
-
 // sets the port to use
 // process.env.PORT finds a port in the environmental vairables
 // if not use 3000
@@ -39,3 +30,18 @@ server.listen(port, () => {
     console.log(`started on port: ${port}`);
 });
 
+// triggers when a user connects to the socket
+io.on('connection', (socket) => {
+    // sets an event listener for the "new-message" event
+    console.log(socket.id)
+    socket.on('new-message', (message, id) => {
+        console.log("new message recived: "+message)
+        // sends back an event of "new-message" 
+        io.emit("new-message",message);
+    });
+
+
+    socket.on('comp-key', (letter, id, playerNum) =>{
+        io.to(id).emit('comp-key', letter, playerNum)
+    })
+});
