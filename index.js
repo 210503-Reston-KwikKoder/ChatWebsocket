@@ -15,7 +15,7 @@ const { Server } = require('socket.io');
 const io = new Server(server, {
     // defines the cors policy
     cors: {
-        origin: "http://localhost:4200",
+        origin: "*",
         methods: ["GET", "POST"]
     }
 });
