@@ -36,19 +36,24 @@ server.listen(port, () => {
 io.on('connection', (socket) => {
     // sets an event listener for the "new-message" event
     
-    socket.on('new-message', (message, id) => {
-        console.log("new message recived: "+message)
+    socket.on('new-message', (message, roomId) => {
+        console.log("new message recived: "+message, "room id: "+id)
         // sends back an event of "new-message" 
-        io.to(id).emit("new-message",message);
-    });
+        io.to(roomId).emit("new-message",message);
+    })
 
 
-    socket.on('comp-key', (letter, id, playerNum) => {
-        io.to(id).emit('comp-key', letter, playerNum)
+    socket.on('comp-key', (letter, roomId, playerNum) => {
+        io.to(roomId).emit('comp-key', letter, playerNum)
+    })
+
+    // puts users in to a que
+    socket.on('updated-que', ( roomId) => {
+        io.to(roomId).emit('enter-que')
     })
 
     // need the room id from the front end
-    socket.on('join-comp-room', (id) => {
-        socket.join(id)
+    socket.on('join-comp-room', (roomId) => {
+        socket.join(roomId)
     })
 });
