@@ -24,7 +24,7 @@ const io = new Server(server, {
 // sets the port to use
 // process.env.PORT finds a port in the environmental vairables
 // if not use 3000
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 
 //starts listening for activity on the port
