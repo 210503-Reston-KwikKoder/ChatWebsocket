@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: chat-api
+  template:
+    metadata:
+      labels:
+        app: chat-api
+    spec:
+      containers:
+        - name: chat-api
+          image: kwikkoder/chat-api:${IMAGE_TAG}
+          ports:
+            - containerPort: 80
+         
+
+     
+# the container port is you defining the docker run -p portYou'reExposing:containerPort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-api
+spec:
+  ports:
+    - targetPort: 80
+      port: 3000
+  # This is the port the service is exposing
+  selector:
+    app: chat-api
