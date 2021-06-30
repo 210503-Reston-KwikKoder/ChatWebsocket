@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
     // sets an event listener for the "new-message" event
     
     socket.on('new-message', (message, roomId) => {
-        console.log("new message recived: "+message, "room id: "+id)
+        console.log("new message recived: "+message, "room id: "+roomId)
         // sends back an event of "new-message" 
         io.to(roomId).emit("new-message",message);
     })
@@ -55,5 +55,10 @@ io.on('connection', (socket) => {
     // need the room id from the front end
     socket.on('join-comp-room', (roomId) => {
         socket.join(roomId)
+    })
+
+    // winner sends the next challengers id to the room so the next challanger knows who they are
+    socket.on('new-challenger', (challengerId, roomId) => {
+        socket.to(roomId).emit('new-challenger', challengerId)
     })
 });
