@@ -28,8 +28,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - targetPort: 80
+    - name: chat-api
+      protocol: TCP
       port: 3000
+      targetPort: 80
   # This is the port the service is exposing
   selector:
     app: chat-api
