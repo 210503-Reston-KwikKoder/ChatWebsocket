@@ -19,7 +19,8 @@ const io = new Server(server
     // defines the cors policy
     cors: {
         origin: "*",
-        credentials: false
+        credentials: false,
+        allowedHeaders: "*"
         // methods: ["GET", "POST"]
     }
 }
