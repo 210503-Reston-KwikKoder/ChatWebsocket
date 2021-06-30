@@ -1,10 +1,8 @@
 // these import the express module
 const express = require('express')
 const app = express();
-
 // 
-const cors = require('cors');
-app.use(cors());
+
 
 
 // creates the serve from the express module
@@ -17,13 +15,14 @@ const server = http.Server(app);
 // each user gets a socket from the io server
 const { Server } = require('socket.io');
 const io = new Server(server
-//     , {
-//     // defines the cors policy
-//     cors: {
-//         origin: "*",
-//         methods: ["GET", "POST"]
-//     }
-// }
+    , {
+    // defines the cors policy
+    cors: {
+        origin: "*",
+        credentials: false
+        // methods: ["GET", "POST"]
+    }
+}
 );
 // 
 
