@@ -16,7 +16,8 @@ spec:
         - name: chat-api
           image: kwikkoder/chat-api:${IMAGE_TAG}
           ports:
-            - containerPort: 3000
+            - name: websocket
+              containerPort: 3000
 
      
 # the container port is you defining the docker run -p portYou'reExposing:containerPort
@@ -28,10 +29,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - name: chat-api
+    - name: websocket
       protocol: TCP
       port: 3000
-      targetPort: 80
+      targetPort: 3000
   # This is the port the service is exposing
   selector:
     app: chat-api
