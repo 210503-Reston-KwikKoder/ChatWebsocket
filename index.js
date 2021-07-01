@@ -42,10 +42,10 @@ server.listen(port, () => {
 io.on('connection', (socket) => {
     // sets an event listener for the "new-message" event
     
-    socket.on('new-message', (message, roomId) => {
+    socket.on('new-message', (message, senderName, roomId) => {
         console.log("new message recived: "+message, "room id: "+roomId)
         // sends back an event of "new-message" 
-        io.to(roomId).emit("new-message",message);
+        io.to(roomId).emit("new-message", message, senderName);
     })
 
 
