@@ -65,6 +65,8 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('round-start')
     })
 
-
+    socket.on('new-test', (roomId, test) => {
+        socket.to(roomId).emit('new-test', test)
+    })
 
 });
