@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('new-test', (roomId, test) => {
-        socket.to(roomId).emit('new-test', test)
+        io.to(roomId).emit('new-test', test)
     })
 
 });
