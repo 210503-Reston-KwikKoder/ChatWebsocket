@@ -3,8 +3,6 @@ const express = require('express')
 const app = express();
 // 
 
-
-
 // creates the serve from the express module
 const http = require('http');
 const server = http.Server(app);
@@ -55,7 +53,7 @@ io.on('connection', (socket) => {
 
     // puts users in to a que
     socket.on('updated-que', ( roomId) => {
-        io.to(roomId).emit('enter-que')
+        io.to(roomId).emit('updated-que')
     })
 
     // need the room id from the front end
@@ -63,8 +61,10 @@ io.on('connection', (socket) => {
         socket.join(roomId)
     })
 
-    // winner sends the next challengers id to the room so the next challanger knows who they are
-    socket.on('new-challenger', (challengerId, roomId) => {
-        socket.to(roomId).emit('new-challenger', challengerId)
+    socket.on('round-start', (roomId) => {
+        io.to(roomId).emit('round-start')
     })
+
+
+
 });
