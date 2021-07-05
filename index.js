@@ -72,4 +72,8 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('new-test', test)
     })
 
+    socket.on('winner-found', (roomId, winner) => {
+        io.to(roomId).emit('winner-found', winner)
+    })
+
 });
