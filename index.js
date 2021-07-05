@@ -52,7 +52,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('comp-progress', (userState) => {
-        io.to(userState.roomId).emit('comp-progrees', userState)
+        io.to(userState.roomId).emit('comp-progress', userState)
     })
     // puts users in to a que
     socket.on('updated-que', ( roomId) => {
