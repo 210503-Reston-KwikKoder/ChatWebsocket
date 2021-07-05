@@ -51,6 +51,9 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('comp-key', letter, playerNum)
     })
 
+    socket.on('comp-progress', (userState) => {
+        io.to(userState.roomId).emit(userState)
+    })
     // puts users in to a que
     socket.on('updated-que', ( roomId) => {
         io.to(roomId).emit('updated-que')
