@@ -76,4 +76,8 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('winner-found', winner)
     })
 
+    socket.on('reset-test', (roomId) => {
+        io.to(roomId).emit('reset-test')
+    })
+
 });
