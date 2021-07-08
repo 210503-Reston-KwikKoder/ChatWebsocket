@@ -64,6 +64,10 @@ io.on('connection', (socket) => {
         socket.join(roomId)
     })
 
+    socket.on('leave-comp-room', (roomId) => {
+        socket.leave(roomId)
+    })
+
     socket.on('round-start', (roomId) => {
         io.to(roomId).emit('round-start')
     })
